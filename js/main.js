@@ -21,6 +21,7 @@ new Vue({
             this.secondColumn = this.secondColumn.filter(group => group.id !== groupId);
             this.thirdColumn = this.thirdColumn.filter(group => group.id !== groupId);
             this.saveDataToLocalStorage();
+            this.checkDisableFirstColumn();
         },
         updateProgress(card) {
             const checkedCount = card.items.filter(item => item.checked).length;
@@ -31,6 +32,7 @@ new Vue({
             }
             this.checkMoveCard();
             this.checkDisableFirstColumn();
+            this.saveDataToLocalStorage();
         },
         moveFirstColumn() {
             this.firstColumn.forEach(note => {
