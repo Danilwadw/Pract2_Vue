@@ -85,6 +85,7 @@ new Vue({
         },
         createNotes() {
             if (this.noteTitle && this.items.length >= 3 && this.items.length <= 5) {
+                const firstColumnCardCount = this.firstColumn.length; // Количество карточек в первом столбце
                 const newNoteGroup = {
                     id: Date.now(),
                     noteTitle: this.noteTitle,
@@ -93,7 +94,7 @@ new Vue({
                     lastChecked: null
                 };
 
-                if (this.items.some(item => item.text.trim() !== '')) {
+                if (firstColumnCardCount < 3 && this.items.some(item => item.text.trim() !== '')) {
                     this.firstColumn.push(newNoteGroup);
                     this.saveDataToLocalStorage();
                 }
