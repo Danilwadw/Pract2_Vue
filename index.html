@@ -10,67 +10,56 @@
 <body>
 
     <div id="app">
-        <form class="cardForm" @submit.prevent="addCard">
+        <form class="cardForm" @submit.prevent="addItem">
             <p>
-                <label for="GroupName">Имя  :</label>
-                <input id="GroupName" v-model="groupName">
+                <label for="NoteTitle">Имя:</label>
+                <input class="titlenote" id="NoteTitle" v-model="noteTitle" required>
+            </p>
+            <p v-for="(item, index) in items" :key="index">
+                <label>{{ `Action ${index + 1}:` }}</label>
+                <input v-model="item.text" required>
             </p>
             <p>
-                <label for="InputOne">Цель :</label>
-                <input id="InputOne" v-model="inputOne">
-            </p>
-            <p>
-                <label for="InputTwo">Цель :</label>
-                <input id="InputTwo" v-model="inputTwo">
-            </p>
-            <p>
-                <label for="InputThree">Цель :</label>
-                <input id="InputThree" v-model="inputThree">
-            </p>
-            <p>
-                <label for="InputFor">Цель :</label>
-                <input id="InputFor" v-model="inputFor">
-            </p>
-            <p>
-                <button type="submit" class="Submit">Добавить</button>
+                <button class="btn" :disabled="items.length >= 5">Добавить цель</button>
+                <button class="btn create-btn" @click="createNotes" :disabled="items.length === 0">Создать</button>
             </p>
         </form>
-        <div class="columns" style="display: flex; justify-content: space-evenly; ">
+        <div class="columns">
             <div class="column">
-                <h2> Один</h2>
+                <h2>Колонка Один</h2>
                 <div class="card" v-for="group in firstColumn" :key="group.id">
-                    <h3>{{group.groupName}}</h3>
+                    <h3>{{ group.noteTitle }}</h3>
                     <ul>
                         <li v-for="item in group.items" :key="item.id">
                             <input type="checkbox" v-model="item.checked" @change="updateProgress(group)"> {{ item.text }}
                         </li>
                     </ul>
-                    <button @click="deleteCard(firstColumn, group)">Удалить</button>
                 </div>
             </div>
             <div class="column">
-                <h2> Два</h2>
+                <h2>Колонка Два</h2>
                 <div class="card" v-for="group in secondColumn" :key="group.id">
-                    <h3>{{group.groupName}}</h3>
+                    <h3>{{ group.noteTitle }}</h3>
                     <ul>
                         <li v-for="item in group.items" :key="item.id">
                             <input type="checkbox" v-model="item.checked" @change="updateProgress(group)"> {{ item.text }}
                         </li>
                     </ul>
-                    <button @click="deleteCard(secondColumn, group)">Удалить</button>
                 </div>
             </div>
             <div class="column">
-                <h2> Три</h2>
-                <div class="card" v-for="group in thirdColumn" :key="group.id">
-                    <h3>{{group.groupName}}</h3>
-                    <ul>
-                        <li v-for="item in group.items" :key="item.id">
-                            <input type="checkbox" v-model="item.checked"> {{ item.text }}
-                        </li>
-                    </ul>
-                    <p v-if="group.isComplete"> {{ group.lastChecked }}</p>
-                    <button @click="deleteCard(thirdColumn, group)" v-if="group.isComplete">Удалить</button>
+                <h2>Колонка Три</h2>
+                <div v-for="group in thirdColumn" :key="group.id">
+                    <div class="card">
+                        <h3>{{ group.noteTitle }}</h3>
+                        <ul>
+                            <li v-for="item in group.items" :key="item.id">
+                                <input type="checkbox" v-model="item.checked"> {{ item.text }}
+                            </li>
+                        </ul>
+                        <p v-if="group.isComplete">{{ group.lastChecked }}</p>
+                        <button class="btndel" @click="deleteNoteGroup(group.id)">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
-button {
+.btndel {
     background-color: #dc3545;
     color: #fff;
     border: none;
@@ -43,7 +43,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.btndel:hover {
     background-color: #c82333;
 }
 
@@ -69,14 +69,14 @@ p {
     margin-right: 5px;
 }
 
-.Submit {
-    background-color: #0cc525;
+.btn {
+    background-color: darkgreen;
     color: #fff;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
 }
 
-.Submit:hover {
-    background-color: #0a7b17;
+.btn:hover {
+    background-color: rgb(11, 176, 47);
 }
