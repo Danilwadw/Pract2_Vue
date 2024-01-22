@@ -6,7 +6,7 @@ new Vue({
         firstColumn: [],
         secondColumn: [],
         thirdColumn: [],
-        isFirstColumnFixed: false
+        isFirstColumnFixed: false,
     },
     mounted() {
         if (localStorage.getItem('noteData')) {
@@ -40,6 +40,16 @@ new Vue({
 
             this.checkMoveCard();
             this.saveDataToLocalStorage();
+        },
+        disableFirstColumn() {
+            this.isFirstColumnFixed = true;
+
+            this.firstColumn.forEach(note => {
+                note.items.forEach(item => {
+                    item.disabled = true;
+                    item.isFixed = item.checked;
+                });
+            });
         },
         moveFirstColumn() {
             this.firstColumn.forEach(note => {
@@ -86,6 +96,13 @@ new Vue({
                         }
                     });
                 });
+            } else if (this.isFirstColumnFixed) {
+                this.isFirstColumnFixed = false;
+                this.firstColumn.forEach(note => {
+                    note.items.forEach(item => {
+                        item.disabled = false;
+                    });
+                });
             }
         },
         addItem() {
@@ -126,9 +143,6 @@ new Vue({
                 thirdColumn: this.thirdColumn
             };
             localStorage.setItem('noteData', JSON.stringify(noteData));
-        },
-        disableFirstColumn() {
-            this.isFirstColumnFixed = true;
         },
     }
 });

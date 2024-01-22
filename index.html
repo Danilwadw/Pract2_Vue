@@ -25,13 +25,13 @@
             </p>
         </form>
         <div class="columns">
-            <div class="column" :class="[isFirstColumnFixed ? 'fixed' : '']">
+            <div class="column">
                 <h2>Колонка Один</h2>
                 <div class="card" v-for="group in firstColumn" :key="group.id">
                     <h3>{{ group.noteTitle }}</h3>
                     <ul>
                         <li v-for="item in group.items" :key="item.id">
-                            <input type="checkbox" v-model="item.checked" @change="updateProgress(group)" :disabled="isFirstColumnFixed && item.checked"> {{ item.text }}
+                            <input type="checkbox" v-model="item.checked" :class="{ fixed: item.isFixed }" @change="updateProgress(group)"> {{ item.text }}
                         </li>
                     </ul>
                 </div>
