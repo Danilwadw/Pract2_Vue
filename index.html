@@ -16,7 +16,7 @@
                 <input class="titlenote" id="NoteTitle" v-model="noteTitle" required>
             </p>
             <p v-for="(item, index) in items" :key="index">
-                <label>{{ `Action ${index + 1}:` }}</label>
+                <label>{{ `Цель ${index + 1}:` }}</label>
                 <input v-model="item.text" required>
             </p>
             <p>
