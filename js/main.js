@@ -34,6 +34,10 @@ new Vue({
                 card.lastChecked = new Date().toLocaleString();
             }
 
+            card.items.forEach(item => {
+                item.disabled = item.checked;
+            });
+
             if (progress >= 50 && this.secondColumn.length >= 5) {
                 this.disableFirstColumn();
             }
@@ -63,7 +67,6 @@ new Vue({
                     this.moveSecondColumn();
                 }
             });
-
         },
         moveSecondColumn() {
             this.secondColumn.forEach(note => {
@@ -75,7 +78,7 @@ new Vue({
                     this.secondColumn.splice(this.secondColumn.indexOf(note), 1);
                     this.moveFirstColumn();
                 }
-            })
+            });
         },
         checkMoveCard() {
             this.moveFirstColumn();

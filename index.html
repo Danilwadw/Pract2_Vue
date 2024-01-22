@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div id="app">
         <form class="cardForm" @submit.prevent="addItem">
             <p>
@@ -31,7 +30,7 @@
                     <h3>{{ group.noteTitle }}</h3>
                     <ul>
                         <li v-for="item in group.items" :key="item.id">
-                            <input type="checkbox" v-model="item.checked" :class="{ fixed: item.isFixed }" @change="updateProgress(group)"> {{ item.text }}
+                            <input type="checkbox" v-model="item.checked" :disabled="item.checked" :class="{ fixed: item.isFixed }" @change="updateProgress(group)"> {{ item.text }}
                         </li>
                     </ul>
                 </div>
@@ -42,7 +41,7 @@
                     <h3>{{ group.noteTitle }}</h3>
                     <ul>
                         <li v-for="item in group.items" :key="item.id">
-                            <input type="checkbox" v-model="item.checked" @change="updateProgress(group)"> {{ item.text }}
+                            <input type="checkbox" v-model="item.checked" :disabled="item.checked" @change="updateProgress(group)"> {{ item.text }}
                         </li>
                     </ul>
                 </div>
@@ -54,7 +53,7 @@
                         <h3>{{ group.noteTitle }}</h3>
                         <ul>
                             <li v-for="item in group.items" :key="item.id">
-                                <input type="checkbox" v-model="item.checked"> {{ item.text }}
+                                <input type="checkbox" v-model="item.checked" :disabled="item.checked"> {{ item.text }}
                             </li>
                         </ul>
                         <p v-if="group.isComplete">{{ group.lastChecked }}</p>
