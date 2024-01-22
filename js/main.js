@@ -5,7 +5,8 @@ new Vue({
         items: [],
         firstColumn: [],
         secondColumn: [],
-        thirdColumn: []
+        thirdColumn: [],
+        isFirstColumnFixed: false
     },
     mounted() {
         if (localStorage.getItem('noteData')) {
@@ -27,6 +28,8 @@ new Vue({
             const checkedCount = card.items.filter(item => item.checked).length;
             const progress = (checkedCount / card.items.length) * 100;
             card.isComplete = progress === 100;
+            this.checkMoveCard();
+            this.saveDataToLocalStorage();
             if (card.isComplete) {
                 card.lastChecked = new Date().toLocaleString();
             }
@@ -67,6 +70,9 @@ new Vue({
         checkMoveCard() {
             this.moveFirstColumn();
             this.moveSecondColumn();
+            if (this.isFirstColumnFixed && this.firstColumn.length === 0) {
+                this.isFirstColumnFixed = false;
+            }
         },
         checkDisableFirstColumn() {
             if (this.secondColumn.length >= 5) {
@@ -120,6 +126,9 @@ new Vue({
                 thirdColumn: this.thirdColumn
             };
             localStorage.setItem('noteData', JSON.stringify(noteData));
-        }
+        },
+        disableFirstColumn() {
+            this.isFirstColumnFixed = true;
+        },
     }
 });
