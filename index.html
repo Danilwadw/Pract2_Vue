@@ -25,7 +25,9 @@
         </form>
         <div class="columns">
             <div class="column">
-                <h2>Колонка Один</h2>
+                <h2>Колонка Один
+                    <button class="btndel" @click="deleteAllCardsInColumn(1)">Delete All</button>
+                </h2>
                 <div class="card" v-for="group in firstColumn" :key="group.id">
                     <h3>{{ group.noteTitle }}</h3>
                     <ul>
@@ -36,7 +38,9 @@
                 </div>
             </div>
             <div class="column">
-                <h2>Колонка Два</h2>
+                <h2>Колонка Два
+                    <button class="btndel" @click="deleteAllCardsInColumn(2)">Delete All</button>
+                </h2>
                 <div class="card" v-for="group in secondColumn" :key="group.id">
                     <h3>{{ group.noteTitle }}</h3>
                     <ul>
@@ -47,7 +51,9 @@
                 </div>
             </div>
             <div class="column">
-                <h2>Колонка Три</h2>
+                <h2>Колонка Три
+                    <button class="btndel" @click="deleteAllCardsInColumn(3)">Delete All</button>
+                </h2>
                 <div v-for="group in thirdColumn" :key="group.id">
                     <div class="card">
                         <h3>{{ group.noteTitle }}</h3>

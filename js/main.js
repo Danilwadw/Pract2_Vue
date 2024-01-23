@@ -139,6 +139,23 @@ new Vue({
                 this.items = [];
             }
         },
+        deleteAllCardsInColumn(columnIndex) {
+            switch (columnIndex) {
+                case 1:
+                    this.firstColumn = [];
+                    break;
+                case 2:
+                    this.secondColumn = [];
+                    break;
+                case 3:
+                    this.thirdColumn = [];
+                    break;
+                default:
+                    break;
+            }
+            this.saveDataToLocalStorage();
+            this.checkDisableFirstColumn();
+        },
         saveDataToLocalStorage() {
             const noteData = {
                 firstColumn: this.firstColumn,
